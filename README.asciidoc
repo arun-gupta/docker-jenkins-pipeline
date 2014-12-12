@@ -23,3 +23,13 @@
 . Show how Jenkins can track the WAR file was deployed
 . Update Java EE 7 application which require cross-container communication
 
+= Getting started (WIP)
+
+. Checkout this git repository
+`git clone https://github.com/arun-gupta/devops.git`
+. Build docker image to run this demo
+`docker build -t devops-demo .`
+. Run docker container
+`docker run -p 8080:8080 -it devops-demo`
+. Point your browser to jenkins
+.. When using http://192.168.53.103:8080[boot2docker]
