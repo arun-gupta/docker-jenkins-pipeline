@@ -1,4 +1,4 @@
-package org.acme.devops;
+package org.example.pipeline;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

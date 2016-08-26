@@ -1,4 +1,4 @@
-package org.acme.devops;
+package org.example.pipeline;
 
 /**
  * Hello world!
