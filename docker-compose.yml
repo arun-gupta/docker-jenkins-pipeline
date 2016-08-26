@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+
+  unit:
+    image: maven
+    volumes:
+      - .:/usr/src/myapp
+      - /tmp/go:/go
+    command: bash -c "mvn test"
