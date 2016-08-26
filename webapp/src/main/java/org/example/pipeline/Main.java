@@ -11,9 +11,7 @@ import com.couchbase.client.java.document.json.JsonObject;
 public class Main {
 
     public static void main(String[] args) {
-
-        CouchbaseCluster cluster = CouchbaseCluster.create();
-        Bucket bucket = cluster.openBucket("books");
+        Bucket bucket = Database.getBucket("books");
 
         JsonObject jsonObject = JsonObject.create();
         jsonObject.put("isbn", "978-1-4919-1889-0");
