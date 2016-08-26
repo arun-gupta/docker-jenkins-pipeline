@@ -18,7 +18,7 @@ public class Main {
         JsonObject jsonObject = JsonObject.create();
         jsonObject.put("isbn", "978-1-4919-1889-0");
         jsonObject.put("name", "Minecraft Modding with Forge");
-        jsonObject.put("free", "29.99");
+        jsonObject.put("cost", "29.99");
         JsonDocument document = JsonDocument.create("minecraft", jsonObject);
         bucket.upsert(document);
 
