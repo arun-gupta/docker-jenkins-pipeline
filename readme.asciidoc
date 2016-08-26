@@ -1,4 +1,10 @@
-= Devops with Java EE, Jenkins, WildFly
+= Docker + Java + Jenkins Pipeline
+
+. Build app `mvn -f webapp/pom.xml clean package`
+. Create Docker image `docker-compose build app`
+. Run Docker container `docker-compose run app`
+
+== OLD 
 
 . Step 1
 .. Run Java EE 7 application in WildFly as a Docker container
