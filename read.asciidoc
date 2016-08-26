@@ -1,0 +1,35 @@
+= Devops with Java EE, Jenkins, WildFly
+
+. Step 1
+.. Run Java EE 7 application in WildFly as a Docker container
+.. Configure Jenkins as a Docker container, automatically create the job
+.. Jenkins is configured to poll github repo every 10 mins, and if there is any change, run Arquillian unit tests and report the results (where would slave be running ? Or will the job run on master ?)
+. Step 2
+.. Add static code analysis using Cobertura plugin (run on a separate container ?)
+. Step 3
+.. Add integration/functional testing using Arquillian
+... Selenium with different browsers
+. Step 4
+.. Add UAT with manual input
+. Step 5
+.. A/B testing
+
+= Ideas
+
+. Add security testing in the pipeline
+. How can Jenkins on Docker contianer can be hooked using github webhook
+. Run the entire setup on OpenShift Online
+. Run the entire setup on OpenShift Enterprise
+. Show how Jenkins can track the WAR file was deployed
+. Update Java EE 7 application which require cross-container communication
+
+= Getting started (WIP)
+
+. Checkout this git repository
+`git clone https://github.com/arun-gupta/devops.git`
+. Build docker image to run this demo
+`docker build -t devops-demo .`
+. Run docker container
+`docker run -p 8080:8080 -it devops-demo`
+. Point your browser to jenkins
+.. When using http://192.168.53.103:8080[boot2docker]
