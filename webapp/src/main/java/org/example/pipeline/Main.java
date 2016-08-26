@@ -1,12 +1,11 @@
 package org.example.pipeline;
 
 import com.couchbase.client.java.Bucket;
-import com.couchbase.client.java.CouchbaseCluster;
 import com.couchbase.client.java.document.JsonDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 
 /**
- * Hello world!
+ * @arungupta
  */
 public class Main {
 
