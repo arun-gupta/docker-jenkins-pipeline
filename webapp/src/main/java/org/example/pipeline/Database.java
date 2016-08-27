@@ -13,7 +13,7 @@ public class Database {
 
     public static final CouchbaseCluster getCluster() {
         if (null == cluster) {
-            cluster = CouchbaseCluster.create();
+            cluster = CouchbaseCluster.create(System.getProperty("DB_URI"));
         }
         return cluster;
     }

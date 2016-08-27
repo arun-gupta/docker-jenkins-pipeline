@@ -44,6 +44,12 @@
                 </executions>
                 <configuration>
                     <mainClass>org.example.pipeline.Main</mainClass>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>DB_URI</key>
+                            <value>localhost</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
         </plugins>
