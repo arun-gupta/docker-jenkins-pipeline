@@ -13,6 +13,12 @@ public class Database {
 
     public static final CouchbaseCluster getCluster() {
         if (null == cluster) {
+            String host = System.getProperty("DB_URI");
+            if (null == host) {
+                System.err.println("Invalid host: " + host);
+                System.exit(1);
+            }
+            System.out.println("Using host: " + System.getProperty("DB_URI"));
             cluster = CouchbaseCluster.create(System.getProperty("DB_URI"));
         }
         return cluster;
