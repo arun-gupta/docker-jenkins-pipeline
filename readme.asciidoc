@@ -1,10 +1,9 @@
 = Docker + Java + Jenkins Pipeline
 
-. Build app: `mvn -f webapp/pom.xml clean package`
-. Start database: `docker-compose run -d --name db --service-ports db`
-. Find IP address of database container: `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`
-. Build Docker image: `docker-compose build app`
-. Run Docker container: `docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) app` (Host is still null)
+. *Build app*: `mvn -f webapp/pom.xml clean package`
+. *Start database*: `docker-compose run -d --name db --service-ports db`
+. *Build Docker image*: `docker-compose build app`
+. *Run Docker container*: `docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) app` (Host is still null)
 
 == DEBUG
 
