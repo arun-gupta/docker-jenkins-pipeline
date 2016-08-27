@@ -1,7 +1,6 @@
 = Docker + Java + Jenkins Pipeline
 
 . Build app: `mvn -f webapp/pom.xml clean package`
-#. Create an overlay network: `docker network create -d overlay pipeline`
 . Start database: `docker-compose run -d --name db --service-ports db`
 . Find IP address of database container: `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`
 . Build Docker image: `docker-compose build app`
