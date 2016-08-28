@@ -1,11 +1,13 @@
 = Docker + Java + Jenkins Pipeline
 
+== Manual Steps
+
 . *Start database*: `docker-compose run -d --name db --service-ports db`
 . *Build app*: `mvn -f webapp/pom.xml clean package`
 . *Build app Docker image*: `docker-compose build app`
 . *Run app Docker container*: `docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) app`
 
-== DEBUG
+== Debug
 
 . *Run using Maven*: `mvn -f webapp/pom.xml exec:java` (Host is null)
 
