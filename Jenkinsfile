@@ -10,7 +10,7 @@ node {
 
   stage('Create Docker Image') {
     dir('webapp') {
-        docker.withRegistry("https://arun-gupta-docker-docker_jenkins_pipeline.bintray.io", "bintray") {
+        docker.withRegistry("https://arun-gupta-docker-docker_jenkins_pipeline.bintray.io", "bintray2") {
         def app = docker.build("arun-gupta-docker-docker_jenkins_pipeline.bintray.io/workshop/docker_jenkins_pipeline:${env.BUILD_NUMBER}")
         app.push()
       }
