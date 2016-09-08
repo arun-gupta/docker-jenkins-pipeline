@@ -14,7 +14,7 @@ node {
           //def app = docker.build("arun-gupta-docker-docker_jenkins_pipeline.bintray.io/workshop/docker_jenkins_pipeline:${env.BUILD_NUMBER}")
           //def app = docker.build("docker_jenkins_pipeline:${env.BUILD_NUMBER}")
         //}
-      docker.build("arungupta/docker_jenkins_pipeline:${env.BUILD_NUMBER}").push()
+      docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()
     }
   }
 }
