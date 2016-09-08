@@ -13,6 +13,9 @@ services:
     build: ./webapp
     image: arungupta/docker-jenkins-app
 
+  app2:
+    image: arungupta/docker-jenkins-pipeline:${BUILD_NUMBER}
+
   unit:
     image: maven
     volumes:
