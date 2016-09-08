@@ -24,7 +24,8 @@ node {
   stage('Run Tests') {
     db = docker.image("arungupta/couchbase").withRun("-d --name db --service-ports db")
     dir('webapp') {
-      sh "mvn test -DDB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db)"
+      sh "DB_URI=docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db"
+      sh "mvn test -DDB_URI=$DB_URI db)"
     }
     db.stop()
     junit '**/target/surefire-reports/*.xml'
