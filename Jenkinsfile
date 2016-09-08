@@ -4,7 +4,6 @@ node {
   stage('Compile') {
     dir('webapp') {
       sh 'mvn clean package -DskipTests'
-      junit '**/target/surefire-reports/*.xml'
     }
   }
 
@@ -15,14 +14,18 @@ node {
   }
 
   stage ('Run Application') {
-    docker.image("arungupta/couchbase").withRun() {c ->
-      docker.image("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").withRun()
-    }
+    sh 'docker-compose run -d --name db --service-ports db'
+    sh "docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) -e BUILD_NUMBER=${env.BUILD_NUMBER} app2"
+    sh 'docker-compose stop db'
+    sh 'docker-compose rm db'
   }
 
   stage('Run Tests') {
-    docker.image("arungupta/couchbase").withRun() { c -> 
-      sh 'mvn test'
+    db = docker.image("arungupta/couchbase").withRun("-d --name db --service-ports db")
+    dir('webapp') {
+      sh "mvn test -DDB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db)"
     }
+    db.stop()
+    junit '**/target/surefire-reports/*.xml'
   }
 }
