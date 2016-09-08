@@ -7,6 +7,28 @@
 . *Build app Docker image*: `docker-compose build app`
 . *Run app Docker container*: `docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) app`
 
+== Setup Bintray repository
+
+. Create Bintray account
+. Find the following credentials from Profile. These will be used in Jenkins credentials later.
+.. Username
+.. API key
+
+== Jenkins
+
+=== Configure
+
+. Download Jenkins, this was tested with 2.21[http://mirrors.jenkins-ci.org/war/2.21/jenkins.war].
+. Start Jenkins: `JENKINS_HOME=~/.jenkins java -jar ~/Downloads/jenkins-2.21.war --httpPort=9090`
+. Create First Admin User, `Save and Finish`.
+. Install suggested plugins
+. `Manage Jenkins`, `Manage Plugins`, `Available`, install `CloudBees Docker Pipeline` plugin, `Install without restart`
+
+. Add your credentials using `Username and Password`, use username and API key from Bintray. Use the name `bintray`, this is used in `Jenkinsfile`.
+. Add Maven installation directory, call it `Maven3`. This name is used in `Jenkinsfile`.
+. Create a new project, use `Pipeline Script from SCM`
+. Build the project pushes a Docker image to bintray repo
+
 == Debug
 
 . *Run using Maven*: `mvn -f webapp/pom.xml exec:java` (Host is null)
