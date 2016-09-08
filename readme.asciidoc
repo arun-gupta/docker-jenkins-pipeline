@@ -22,7 +22,16 @@
 . Start Jenkins: `JENKINS_HOME=~/.jenkins java -jar ~/Downloads/jenkins-2.21.war --httpPort=9090`
 . Create First Admin User, `Save and Finish`.
 . Install suggested plugins
-. `Manage Jenkins`, `Manage Plugins`, `Available`, install `CloudBees Docker Pipeline` plugin, `Install without restart`
+. `Manage Jenkins`, `Manage Plugins`, `Available`, install `CloudBees Docker Pipeline` plugin, `Install without restart`, select `Restart Jenkins`
+. `Manage Jenkins`, `Global Tool Configuration`, configure Maven, use name `Maven3` (this name is used in `Jenkinsfile`)
+
+=== Create Project
+
+. Create a new project of the type `Pipeline`
+. Configure git repo
+. `Build Now`
+
+=== Bintray Configuration
 
 . Add your credentials using `Username and Password`, use username and API key from Bintray. Use the name `bintray`, this is used in `Jenkinsfile`.
 . Add Maven installation directory, call it `Maven3`. This name is used in `Jenkinsfile`.
