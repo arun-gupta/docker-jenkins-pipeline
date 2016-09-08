@@ -5,7 +5,7 @@ node {
     dir('webapp') {
       sh 'mvn clean package -DskipTests'
       junit '**/target/surefire-reports/*.xml'
-    })
+    }
   }
 
   stage('Create Docker Image') {
