@@ -15,14 +15,14 @@ node {
   }
 
   stage ('Run Application') {
-    docker.image("arungupta/couchbase").withRun(
-      c -> docker.image("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").withRun()
+    docker.image("arungupta/couchbase").withRun(c -> 
+      docker.image("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").withRun()
     )
   }
 
   stage('Run Tests') {
-    docker.image("arungupta/couchbase").withRun(
-      c -> sh 'mvn test'
+    docker.image("arungupta/couchbase").withRun(c -> 
+      sh 'mvn test'
     )
   }
 }
