@@ -9,8 +9,8 @@ node {
 
   stage('Create Docker Image') {
     dir('webapp') {
-      docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()
-      //docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}")
+      //docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()
+      docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}")
     }
   }
 
