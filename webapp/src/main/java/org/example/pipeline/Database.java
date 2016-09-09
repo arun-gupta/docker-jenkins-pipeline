@@ -2,6 +2,7 @@ package org.example.pipeline;
 
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.CouchbaseCluster;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author arungupta
@@ -27,7 +28,7 @@ public class Database {
 
     public static Bucket getBucket(String bucketName) {
         if (null == bucket) {
-            bucket = getCluster().openBucket(bucketName);
+            bucket = getCluster().openBucket(bucketName, 10, TimeUnit.SECONDS);
         }
         return bucket;
     }
