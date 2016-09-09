@@ -9,7 +9,6 @@ node {
 
   stage('Create Docker Image') {
     dir('webapp') {
-      //docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()
       docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}")
     }
   }
@@ -20,7 +19,8 @@ node {
       // sh 'docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 arungupta/oreilly-couchbase:latest'
 
       // Run application using Docker image
-      sh "docker run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}"
+      sh 'DB=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`
+      sh "docker run -e DB_URI=$DB arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}"
 
       // Run tests using Maven
       //dir ('webapp') {
@@ -38,6 +38,7 @@ node {
     try {
       dir('webapp') {
         sh "mvn test"
+        docker.build("arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}").push()
       }
     } catch (error) {
 
