@@ -2,13 +2,20 @@
 
 == Manual Steps
 
-. *Start database*: `docker-compose run -d --name db --service-ports db`
-. *Package app*: `mvn -f webapp/pom.xml clean package`
-. *Run app*: `mvn -f webapp/pom.xml exec:java -DskipTests`
-. *Run test*: `mvn -f webapp/pom.xml test`
+. *Start database*: `docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 arungupta/oreilly-couchbase:latest`
+. Using Maven
+.. *Build app*: `mvn -f webapp/pom.xml clean package`
+.. *Run app*: `mvn -f webapp/pom.xml exec:java -DskipTests`
+.. *Run test*: `mvn -f webapp/pom.xml test`
 . Using Docker
-.. *Build app Docker image*: `docker-compose build app`
-.. *Run app Docker container*: `docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) app`
+.. *Build app*: `docker-compose build app`
+.. *Run app*:
++
+```
+docker-compose run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` app
+```
++
+.. *Run test*: `mvn test`
 
 == Jenkins
 
