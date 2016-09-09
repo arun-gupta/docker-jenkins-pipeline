@@ -32,7 +32,7 @@ public class MainTest
     /**
      * Check if the JSON document was correctly added
      */
-    public void testApp() {
+    public void testDocument() {
         Bucket bucket = Database.getBucket("books");
 
         JsonDocument doc = bucket.get("minecraft");
