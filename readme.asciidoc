@@ -3,9 +3,12 @@
 == Manual Steps
 
 . *Start database*: `docker-compose run -d --name db --service-ports db`
-. *Build app*: `mvn -f webapp/pom.xml clean package`
-. *Build app Docker image*: `docker-compose build app`
-. *Run app Docker container*: `docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) app`
+. *Package app*: `mvn -f webapp/pom.xml clean package`
+. *Run app*: `mvn -f webapp/pom.xml exec:java -DskipTests`
+. *Run test*: `mvn -f webapp/pom.xml test`
+. Using Docker
+.. *Build app Docker image*: `docker-compose build app`
+.. *Run app Docker container*: `docker-compose run -e DB_URI=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db) app`
 
 == Jenkins
 
@@ -41,8 +44,4 @@ This setup is required if you want to push to bintray repository instead.
 . Add Maven installation directory, call it `Maven3`. This name is used in `Jenkinsfile`.
 . Create a new project, use `Pipeline Script from SCM`
 . Build the project pushes a Docker image to bintray repo
-
-== Debug
-
-. *Run using Maven*: `mvn -f webapp/pom.xml exec:java` (Host is null)
 
