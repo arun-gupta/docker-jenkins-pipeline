@@ -16,14 +16,19 @@ node {
 
   stage ('Run Application') {
     try {
+      // Start database container here
       // sh 'docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 arungupta/oreilly-couchbase:latest'
 
+      // Run tests using Docker image
       sh "docker run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}"
+
+      // Run tests using Maven
       //dir ('webapp') {
       //  sh 'mvn exec:java -DskipTests'
       //}
     } catch (error) {
     } finally {
+      // Stop and remove database container here
       //sh 'docker-compose stop db'
       //sh 'docker-compose rm db'
     }
@@ -31,15 +36,12 @@ node {
 
   stage('Run Tests') {
     try {
-      //db = docker.image("arungupta/couchbase").withRun("-d --name db --service-ports db")
       dir('webapp') {
-        //sh "mvn test -DDB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
         sh "mvn test"
       }
     } catch (error) {
 
     } finally {
-      //db.stop()
       junit '**/target/surefire-reports/*.xml'
     }
   }
