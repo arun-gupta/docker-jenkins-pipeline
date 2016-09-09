@@ -8,8 +8,6 @@ services:
       - 8092:8092
       - 8093:8093
       - 11210:11210
-    networks:
-      - jenkins
 
   app:
     build: ./webapp
@@ -17,8 +15,6 @@ services:
 
   app2:
     image: arungupta/docker-jenkins-pipeline:${BUILD_NUMBER}
-    networks:
-      - jenkins
 
   unit:
     image: maven
