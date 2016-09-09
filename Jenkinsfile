@@ -15,15 +15,13 @@ node {
   }
 
   stage ('Run Application') {
-    // docker network create -d overlay jenkins
     //sh 'docker-compose run -d --name db --service-ports db'
-    //sh "DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-    //sh "docker-compose run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` -e BUILD_NUMBER=${env.BUILD_NUMBER} app2"
+    sh "docker-compose run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` -e BUILD_NUMBER=${env.BUILD_NUMBER} app2"
     //sh 'docker-compose stop db'
     //sh 'docker-compose rm db'
-    dir ('webapp') {
-      sh 'mvn exec:java -DskipTests'
-    }
+    //dir ('webapp') {
+    //  sh 'mvn exec:java -DskipTests'
+    //}
   }
 
   stage('Run Tests') {
