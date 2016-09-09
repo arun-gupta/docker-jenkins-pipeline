@@ -28,7 +28,7 @@ public class Database {
 
     public static Bucket getBucket(String bucketName) {
         if (null == bucket) {
-            bucket = getCluster().openBucket(bucketName, 10, TimeUnit.SECONDS);
+            bucket = getCluster().openBucket(bucketName, 30, TimeUnit.SECONDS);
         }
         return bucket;
     }
