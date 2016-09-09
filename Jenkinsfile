@@ -17,7 +17,9 @@ node {
   stage ('Run Application') {
     try {
       //sh 'docker-compose run -d --name db --service-ports db'
-      sh "docker-compose run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` -e BUILD_NUMBER=${env.BUILD_NUMBER} app2"
+      // sh 'docker service create --name db -p 8091-8093:8091-8093 -p 11210:11210 --network jenkins arungupta/couchbase'
+      // sh "docker-compose run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` -e BUILD_NUMBER=${env.BUILD_NUMBER} app2"
+      sh "docker run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` arungupta/docker-jenkins-pipeline:${env.BUILD_NUMBER}"
       //dir ('webapp') {
       //  sh 'mvn exec:java -DskipTests'
       //}
