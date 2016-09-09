@@ -23,3 +23,7 @@ services:
       - /tmp/go:/go
     command: bash -c "mvn test"
 
+networks:
+  default:
+    external:
+      name: jenkins
