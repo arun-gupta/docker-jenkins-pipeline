@@ -16,8 +16,8 @@ node {
 
   stage ('Run Application') {
     sh 'docker-compose run -d --name db --service-ports db'
-    sh "DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
-    sh "docker-compose run -e DB_URI=$DB_URI -e BUILD_NUMBER=${env.BUILD_NUMBER} app2"
+    //sh "DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db`"
+    sh "docker-compose run -e DB_URI=`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' db` -e BUILD_NUMBER=${env.BUILD_NUMBER} app2"
     sh 'docker-compose stop db'
     sh 'docker-compose rm db'
   }
